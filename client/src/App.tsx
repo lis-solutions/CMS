@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import DashboardLayout from "./components/DashboardLayout";
+import { useAuth } from "@/_core/hooks/useAuth";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Customers from "./pages/Customers";
@@ -13,8 +14,10 @@ import Calendar from "./pages/Calendar";
 import TeamChat from "./pages/TeamChat";
 import Settings from "./pages/Settings";
 import Reports from "./pages/Reports";
+import SuperAdmin from "./pages/SuperAdmin";
 
 function Router() {
+  const { user } = useAuth();
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -64,6 +67,13 @@ function Router() {
         {() => (
           <DashboardLayout>
             <Settings />
+          </DashboardLayout>
+        )}
+      </Route>
+      <Route path={"/super-admin"}>
+        {() => (
+          <DashboardLayout>
+            <SuperAdmin />
           </DashboardLayout>
         )}
       </Route>
